@@ -1,7 +1,9 @@
 
 
 const SHA256 = require('crypto-js/sha256');
-const leveldbinst = require('./levelSandbox');
+//const leveldb = require('./levelSandbox');
+var LevelSandbox = require('./levelSandbox')
+var levelInst = new LevelSandbox.LevelSandbox();
 
 class Block{
 	constructor(data){
@@ -10,6 +12,7 @@ class Block{
      this.body = data,
      this.time = 0,
      this.previousBlockHash = ""
+
     }
 }
 
@@ -40,23 +43,26 @@ class Blockchain{
           const prevBlock = await this.getBlock(height);
           newBlock.previousBlockHash = prevBlock.hash;
           console.log(`Previous hash: ${newBlock.previousBlockHash}`);
+
+          console.log(`the time stamp is:${newBlock.time}`)
+          console.log(`height of the block is:${newBlock.height}`)
       }
 
       newBlock.hash = SHA256(JSON.stringify(newBlock)).toString();
       console.log(`New hash: ${newBlock.hash}`);
 
-      await leveldbinst.addBlock(newBlock.height, JSON.stringify(newBlock));
+      await levelInst.addBlock(newBlock.height, JSON.stringify(newBlock));
   }
 
 
    async getBlockHeight(){
-        return await leveldbinst.getBlockHeight();
+        return await levelInst.getBlockHeight();
     }
 
 
   async getBlock(blockHeight){
 
-        return JSON.parse(await leveldbinst.getBlock(blockHeight));
+        return JSON.parse(await levelInst.getBlock(blockHeight));
     }
 
 
@@ -108,13 +114,12 @@ let blockChain = new Blockchain();
         blockChain.addBlock(new Block(`Test data ${i}`)).then(() => {
 
             i++;
-            if (i < 2) theLoop(i);
+            if (i < 10) theLoop(i);
         });
-    }, 500);
-})(0);
 
-// setTimeout(() => {
-//     blockChain.validateChain();
-// },1000)
+    }, 1000);
+})(0);;
+
+
 
 

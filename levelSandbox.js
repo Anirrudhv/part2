@@ -5,41 +5,51 @@
 const level = require('level');
 const chainDB = './chaindata';
 const db = level(chainDB);
-const levelDBinst = {
-    addBlock: (key, value) => new Promise((resolve, reject) => {
+class LevelSandbox {
+    constructor(){
 
-        db.put(key, value, (error) => {
-            if (error) {
-                reject(error)
+    }
+     addBlock(key, value) {
+        return new Promise((resolve, reject) => {
 
-            }
-            console.log(`Added block #${key}`);
-            resolve(`Added block #${key}`);
-        })
-    }),
+            db.put(key, value, (error) => {
+                if (error) {
+                    reject(error);
 
-    getBlock: (key) => new Promise((resolve, reject) => {
-        db.get(key, (error, value) => {
-            if (error) {
-                reject(error)
-            }
-            resolve(value)
-        })
-    }),
-
-    getBlockHeight: () => new Promise((resolve, reject) => {
-        let height = -1;
-        db.createReadStream().on('data', (data) => {
-            height++
-        }).on('error', (error) => {
-            reject(error)
-        }).on('close', () => {
-            resolve(height)
-        })
-    })
-};
-
-module.exports = levelDBinst;
+                }
+                console.log(`Added block #${key}`);
+                resolve(`Added block #${key}`);
+            });
+        });
+   }
 
 
 
+    getBlock(key) {
+        return new Promise((resolve, reject) => {
+            db.get(key, (error, value) => {
+                if (error) {
+                    reject(error);
+                }
+                resolve(value);
+            });
+        });
+    }
+
+
+
+    getBlockHeight() {
+        return new Promise((resolve, reject) => {
+            let height = -1;
+            db.createReadStream().on('data', (data) => {
+                height++
+            }).on('error', (error) => {
+                reject(error);
+            }).on('close', () => {
+                resolve(height);
+            })
+        });
+    }
+
+}
+module.exports.LevelSandbox = LevelSandbox;
