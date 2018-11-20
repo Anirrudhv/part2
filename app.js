@@ -14,9 +14,6 @@ app.get('/', (req, res) => res.status(404).json({
   "message": "Accepted endpoints: POST /block or GET /block/{BLOCK_HEIGHT}"
 }))
 
-/**
- * Criteria: GET Block endpoint using URL path with block height parameter. Preferred URL path http://localhost:8000/block/{BLOCK_HEIGHT}
- */
 app.get('/block/:height', async (req, res) => {
   try {
 
