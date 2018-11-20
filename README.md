@@ -38,5 +38,5 @@ localhost:8000/block/number
 ```
 localhost:8000/block/number
 ```
-{ body:[String]
-}
+_"status": 400,
+    "message": "Testing block with test string data"_
