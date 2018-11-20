@@ -31,12 +31,12 @@ Express.js
 
 ## Testing
 Get
+```curl "GET" "http://localhost:8000/block/0"
 ```
-localhost:8000/block/number
-```
+this will return the details of block 0.
+replace 0 with other numbers to check data in other block
 ## Post
 ```
-localhost:8000/block
+curl -X "POST" "http://localhost:8000/block" -H 'Content-Type: application/json' -d $'{"body":"Testing block with test string data"}'
 ```
-'''_"status": 400,
-    "message": "Testing block with test string data"_'''
+This will create a new block.
