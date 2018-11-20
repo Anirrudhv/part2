@@ -23,10 +23,15 @@ npm install crypto-js --save
 - Install level with --save flag
 ```
 npm install level --save
-``'
+```
 
 
 ####Project 3
 ##Nodejs Framework
 Express.js
 
+##Testing
+Get
+```
+localhost:8000/block/number
+```
