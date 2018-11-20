@@ -25,13 +25,17 @@ npm install crypto-js --save
 npm install level --save
 ```
 
-
-####Project 3
-##Nodejs Framework
+## Project 3
+## Nodejs Framework
 Express.js
 
-##Testing
+## Testing
 Get
 ```
 localhost:8000/block/number
 ```
+```
+localhost:8000/block/number
+```
+{ body:[String]
+}
