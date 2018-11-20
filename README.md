@@ -34,6 +34,7 @@ Get
 ```
 localhost:8000/block/number
 ```
+## Post
 ```
 localhost:8000/block/number
 ```
