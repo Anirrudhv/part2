@@ -6,16 +6,15 @@ var LevelSandbox = require('./levelSandbox')
 var levelInst = new LevelSandbox.LevelSandbox();
 
 class Block{
-	constructor(data){
-     this.hash = "",
-     this.height = 0,
-     this.body = data,
-     this.time = 0,
-     this.previousBlockHash = ""
+    constructor(data){
+        this.hash = "",
+            this.height = 0,
+            this.body = data,
+            this.time = 0,
+            this.previousBlockHash = ""
 
     }
 }
-
 
 
 class Blockchain{
@@ -35,7 +34,7 @@ class Blockchain{
       const height = await this.getBlockHeight();
       newBlock.height = height + 1;
 
-
+        //newBlock.data = "the block number is " + newBlock.height;
       newBlock.time = new Date().getTime().toString().slice(0, -3);
 
 
@@ -51,6 +50,7 @@ class Blockchain{
       newBlock.hash = SHA256(JSON.stringify(newBlock)).toString();
       console.log(`New hash: ${newBlock.hash}`);
 
+
       await levelInst.addBlock(newBlock.height, JSON.stringify(newBlock));
   }
 
@@ -63,6 +63,7 @@ class Blockchain{
   async getBlock(blockHeight){
 
         return JSON.parse(await levelInst.getBlock(blockHeight));
+
     }
 
 
@@ -111,14 +112,16 @@ let blockChain = new Blockchain();
 
 (function theLoop(i) {
     setTimeout(() => {
-        blockChain.addBlock(new Block(`Test data ${i}`)).then(() => {
+        blockChain.addBlock(new Block(`The block is added`)).then(() => {
 
             i++;
-            if (i < 10) theLoop(i);
+            if (i < 1) theLoop(i);
         });
 
     }, 1000);
 })(0);;
+
+module.exports = { Blockchain:Blockchain, Block:Block };
 
 
 
