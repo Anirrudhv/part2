@@ -1,17 +1,17 @@
 const express = require('express')
 const app = express()
-const simplechain = require('./simplechain')
+const simplechain = require('./Blockchain')
 const bodyParser = require('body-parser')
-const Block = new simplechain.Block();
+const Block = require('./Block')
 
-const chain = new simplechain.Blockchain();
+const chain = new simplechain();
 
 
 app.listen(8000, () => console.log('API listening on port 8000'))
 app.use(bodyParser.json())
 app.get('/', (req, res) => res.status(404).json({
   "status": 404,
-  "message": "Accepted endpoints: POST /block or GET /block/{BLOCK_HEIGHT}"
+  "message": "Accepted endpoints"
 }))
 
 app.get('/block/:height', async (req, res) => {
@@ -29,10 +29,12 @@ app.get('/block/:height', async (req, res) => {
 
 
 app.post('/block', async (req, res) => {
-  if (req.body.body === '' || req.body.body === undefined) {
+  console.log(req.body)
+  if (req.body.body === '' || req.body.body === undefined)
+   {
     res.status(400).json({
       "status": 400,
-      message: "Testing block with test string data"
+      message: "Test block"
     })
   }
 

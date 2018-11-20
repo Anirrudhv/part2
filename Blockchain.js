@@ -1,20 +1,11 @@
 
 
 const SHA256 = require('crypto-js/sha256');
-//const leveldb = require('./levelSandbox');
+
 var LevelSandbox = require('./levelSandbox')
 var levelInst = new LevelSandbox.LevelSandbox();
+var Block = require('./Block')
 
-class Block{
-    constructor(data){
-        this.hash = "",
-            this.height = 0,
-            this.body = data,
-            this.time = 0,
-            this.previousBlockHash = ""
-
-    }
-}
 
 
 class Blockchain{
@@ -108,20 +99,10 @@ class Blockchain{
     }
 }}
 
-let blockChain = new Blockchain();
 
-(function theLoop(i) {
-    setTimeout(() => {
-        blockChain.addBlock(new Block(`The block is added`)).then(() => {
 
-            i++;
-            if (i < 1) theLoop(i);
-        });
 
-    }, 1000);
-})(0);;
-
-module.exports = { Blockchain:Blockchain, Block:Block };
+module.exports = Blockchain ;
 
 
 
