@@ -31,7 +31,8 @@ Express.js
 
 ## Testing
 Get
-```curl "GET" "http://localhost:8000/block/0"
+```
+curl "GET" "http://localhost:8000/block/0"
 ```
 this will return the details of block 0.
 replace 0 with other numbers to check data in other block
