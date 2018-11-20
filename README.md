@@ -36,7 +36,7 @@ localhost:8000/block/number
 ```
 ## Post
 ```
-localhost:8000/block/number
+localhost:8000/block
 ```
-_"status": 400,
-    "message": "Testing block with test string data"_
+'''_"status": 400,
+    "message": "Testing block with test string data"_'''
